@@ -13,11 +13,7 @@ export default async (req: NextRequest) => {
     return NextResponse.redirect(fallback)
   }
   const destination = await findDestination(slug)
-  if (destination) {
-    return NextResponse.redirect(destination)
-  } else {
-    return NextResponse.redirect(fallback)
-  }
+  return NextResponse.redirect(destination ?? fallback)
 }
 
 const findDestination = async (slug: string): Promise<string | null> => {
@@ -30,6 +26,5 @@ const findDestination = async (slug: string): Promise<string | null> => {
     .then((records: Array<{ fields: { Slug: string; URL: string } }>) =>
       records.map((record) => record.fields)
     )
-
   return records.find((link) => link.Slug === slug.toLowerCase())?.URL
 }
