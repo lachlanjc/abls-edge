@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const fallback = 'https://lachlanjc.com'
+const fallback = process.env.FALLBACK_URL
 const airtable = {
-  baseId: 'appuzj4fe64tpgmbR',
-  tableName: 'Links',
+  baseId: process.env.AIRTABLE_BASE_ID,
+  tableName: process.env.AIRTABLE_BASE_NAME ?? 'Links',
   apiKey: process.env.AIRTABLE_API_KEY,
 } as const
 
